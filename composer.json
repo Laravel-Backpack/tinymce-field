@@ -1,0 +1,22 @@
+{
+    "name": "backpack/tinymce-field",
+    "description": "TinyMCE field for Backpack",
+    "keywords": ["laravel", "backpack"],
+    "require": {
+        "backpack/crud": "^6.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Backpack\\TinyMCEField\\": "src/"
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Backpack\\TinyMCEField\\BackpackTinyMCEFieldFieldProvider"
+            ]
+        }
+    }
+}
