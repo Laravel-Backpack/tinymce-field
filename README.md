@@ -17,10 +17,26 @@ composer require backpack/tinymce-field
 In your CrudController, use the `tinymce` field type:
 
 ```php
-CRUD::field('content')->type('tinymce');
+CRUD::field([   // TinyMCE
+    'name'  => 'description',
+    'label' => 'Description',
+    'type'  => 'tinymce',
+    // optional overwrite of the configuration array
+    // 'options' => [
+        //'selector' => 'textarea.tinymce',
+        //'skin' => 'dick-light',
+        //'plugins' => 'image link media anchor'
+    // ],
+]);
 ```
 
-Find more information on how to use this field in the [official Backpack for Laravel documentation](https://backpackforlaravel.com/docs/6.x/crud-fields#tinymce).
+**NOTE**: if you want to modify the toolbar buttons (add or remove), here is the default configured toolbar so you can modify it:
+
+```php
+'options' => ['toolbar' => 'undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | outdent indent'],
+```
+
+Some buttons are related to specific plugins and need them to work, please read more about it here: [tiny mce available toolbar buttons](https://www.tiny.cloud/docs/advanced/available-toolbar-buttons/)
 
 ## License
 
