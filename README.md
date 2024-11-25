@@ -1,12 +1,17 @@
 # backpack\tinymce-field
 
-[![Latest Version on Packagist][ico-version]][link-packagist]
-[![Total Downloads][ico-downloads]][link-downloads]
+```
+// TODO: Badge - Latest Version on Packagist
+// TODO: Badge - Total Downloads
+```
 
-A TinyMCE field type for Laravel Backpack, using the [TinyMCE](https://www.tiny.cloud/) WYSIWYG editor.
+A field type for [Laravel Backpack](https://backpackforlaravel.com/) that uses the [TinyMCE](https://www.tiny.cloud/) WYSIWYG editor.
+
+// TODO: screenshot
+
 ## Install
 
-You can install this package via composer using this command:
+To install this package via Composer, run this command:
 
 ```bash
 composer require backpack/tinymce-field
@@ -38,21 +43,17 @@ CRUD::field([   // TinyMCE
 
 Some buttons are related to specific plugins and need them to work, please read more about it here: [tiny mce available toolbar buttons](https://www.tiny.cloud/docs/advanced/available-toolbar-buttons/)
 
-## License
-
-TinyMCE is released under the GPL license. Please see the [TinyMCE licensing page](https://www.tiny.cloud/docs/tinymce/latest/license-key/) for more information. Means that if you use TinyMCE in your project, and you distribute that project, you need to make the source code of your project available under a GPL-compatible license or purchase a commercial TinyMCE license.
-
-
-> ### Security updates and breaking changes
-> Please **[subscribe to the Backpack Newsletter](http://backpackforlaravel.com/newsletter)** so you can find out about any security updates, breaking changes or major features. We send an email every 1-2 months.
-
 ## Security
 
 If you discover any security related issues, please email tabacitu@backpackforlaravel.com instead of using the issue tracker.
 
 Please **[subscribe to the Backpack Newsletter](http://backpackforlaravel.com/newsletter)** so you can find out about any security updates, breaking changes or major features. We send an email every 1-2 months.
 
+## License
+
+TinyMCE is released under the GPL license. Please see the [TinyMCE licensing page](https://www.tiny.cloud/docs/tinymce/latest/license-key/) for more information. Means that if you use TinyMCE in your project, and you distribute that project, you need to make the source code of your project available under a GPL-compatible license or purchase a commercial TinyMCE license.
+
 ## Credits
 
-- [Cristian Tabacitu][link-author]
-- [All Contributors][link-contributors]
+- [Pedro Martins](https://github.com/pxpm)
+- [Cristian Tabacitu](https://github.com/tabacitu)
