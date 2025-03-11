@@ -78,8 +78,8 @@ $field['options'] = array_merge($defaultOptions, $field['options'] ?? []);
                     element.trigger('change');
                 }
 
-                // in case there is no original event, it means the change migth have already 
-                // ocurred, for example, when adding an image or a link from the toolbar.
+                // in case there is no original event, it means the change might have already 
+                // occurred, for example, when adding an image or a link from the toolbar.
                 // we just make sure that the process is complete and we have content
                 if(!hasOriginalEvent && typeof e.level.content !== 'undefined') {
                     editor.save();
