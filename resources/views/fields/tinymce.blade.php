@@ -34,12 +34,22 @@ $field['options'] = array_merge($defaultOptions, $field['options'] ?? []);
 {{-- ########################################## --}}
 {{-- Extra CSS and JS for this particular field --}}
 {{-- If a field type is shown multiple times on a form, the CSS and JS will only be loaded once --}}
-
+@push('crud_fields_styles')
+    {{-- include tinymce css --}}
+    @basset('https://raw.githubusercontent.com/tinymce/tinymce-dist/refs/tags/6.3.2/skins/ui/oxide/skin.min.css')
+    @basset('https://raw.githubusercontent.com/tinymce/tinymce-dist/refs/tags/6.3.2/skins/ui/oxide/content.min.css')
+@endpush
 {{-- FIELD JS - will be loaded in the after_scripts section --}}
 @push('crud_fields_scripts')
     {{-- include tinymce js --}}
-    @bassetArchive('https://github.com/tinymce/tinymce-dist/archive/refs/tags/6.3.2.tar.gz', 'tinymce-6.3.2')
-    @basset('tinymce-6.3.2/tinymce-dist-6.3.2/tinymce.min.js')
+    @basset('https://raw.githubusercontent.com/tinymce/tinymce-dist/refs/tags/6.3.2/tinymce.min.js')
+    @basset('https://raw.githubusercontent.com/tinymce/tinymce-dist/refs/tags/6.3.2/themes/silver/theme.min.js')  
+    @basset('https://raw.githubusercontent.com/tinymce/tinymce-dist/refs/tags/6.3.2/models/dom/model.min.js')
+    @basset('https://raw.githubusercontent.com/tinymce/tinymce-dist/refs/tags/6.3.2/icons/default/icons.min.js')
+    @basset('https://raw.githubusercontent.com/tinymce/tinymce-dist/refs/tags/6.3.2/plugins/image/plugin.min.js')
+    @basset('https://raw.githubusercontent.com/tinymce/tinymce-dist/refs/tags/6.3.2/plugins/link/plugin.min.js')
+    @basset('https://raw.githubusercontent.com/tinymce/tinymce-dist/refs/tags/6.3.2/plugins/media/plugin.min.js')
+    @basset('https://raw.githubusercontent.com/tinymce/tinymce-dist/refs/tags/6.3.2/plugins/anchor/plugin.min.js')
 
     @bassetBlock('backpack/pro/fields/tinymce-field.js')
     <script type="text/javascript">
