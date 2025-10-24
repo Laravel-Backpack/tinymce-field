@@ -42,7 +42,7 @@ $field['options'] = array_merge($defaultOptions, $field['options'] ?? []);
 {{-- FIELD JS - will be loaded in the after_scripts section --}}
 @push('crud_fields_scripts')
     {{-- include tinymce js --}}
-    @basset('https://raw.githubusercontent.com/tinymce/tinymce-dist/refs/tags/6.3.2/tinymce.min.js')
+    @basset('https://raw.githubusercontent.com/tinymce/tinymce-dist/refs/tags/6.3.2/tinymce.min.js', true, ['loading-order' => 1])
     @basset('https://raw.githubusercontent.com/tinymce/tinymce-dist/refs/tags/6.3.2/themes/silver/theme.min.js')  
     @basset('https://raw.githubusercontent.com/tinymce/tinymce-dist/refs/tags/6.3.2/models/dom/model.min.js')
     @basset('https://raw.githubusercontent.com/tinymce/tinymce-dist/refs/tags/6.3.2/icons/default/icons.min.js')
@@ -171,7 +171,7 @@ $field['options'] = array_merge($defaultOptions, $field['options'] ?? []);
     function elFinderBrowser (callback, value, meta) {
         tinymce.activeEditor.windowManager.openUrl({
             title: 'elFinder 2.0',
-            url: '{{ backpack_url('elfinder/tinymce5') }}',
+            url: '{{ backpack_url("elfinder/tinymce5") }}',
             width: 900,
             height: 460,
             onMessage: function (dialogApi, details) {
