@@ -1,13 +1,15 @@
+
+<p>
+    <br>
+    <a href="https://packagist.org/packages/backpack/tinymce-field" title="Latest Version on Packagist"><img src="https://img.shields.io/packagist/v/backpack/tinymce-field.svg?style=flat-square"></a>
+    <a href="https://packagist.org/packages/backpack/tinymce-field" title="Total Downloads"><img src="https://img.shields.io/packagist/dt/backpack/tinymce-field.svg?style=flat-square"></a>
+    <a href="https://github.com/Laravel-Backpack/tinymce-field/commits/master" title="Last commit"><img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/laravel-backpack/tinymce-field"></a>
+    <a href="https://github.com/the-whole-fruit/manifesto"><img src="https://img.shields.io/badge/writing%20standard-the%20whole%20fruit-brightgreen?style=flat-square" title="We believe writing good code is not only about writing good code. It’s also about the words around it. We aims to deliver both: code and words."></a>
+</p>
+
 # backpack\tinymce-field
 
-```
-// TODO: Badge - Latest Version on Packagist
-// TODO: Badge - Total Downloads
-```
-
 A field type for [Laravel Backpack](https://backpackforlaravel.com/) that uses the [TinyMCE](https://www.tiny.cloud/) WYSIWYG editor.
-
-// TODO: screenshot
 
 ## Install
 
