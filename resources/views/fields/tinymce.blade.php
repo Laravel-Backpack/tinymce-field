@@ -153,6 +153,16 @@ $field['options'] = array_merge($defaultOptions, $field['options'] ?? []);
         // initialize the TinyMCE editor
         tinymce.init(configuration);
 
+        var formEl = element[0].closest('form');
+        if (formEl) {
+            formEl.addEventListener('backpack:formmodal:before-submit', function () {
+                var editorInstance = tinymce.get(getTinyMceEditorId());
+                if (editorInstance) {
+                    editorInstance.save();
+                }
+            });
+        }
+
         element.on('CrudField:disable', function(e) {
             let editorId = getTinyMceEditorId();
             let editorInstance = tinymce.get(editorId);
