@@ -20,6 +20,7 @@ $field['options'] = array_merge($defaultOptions, $field['options'] ?? []);
         name="{{ $field['name'] }}"
         data-init-function="bpFieldInitTinyMceElement"
         data-options='{!! trim(json_encode($field['options'])) !!}'
+        data-elfinder-url="{{ backpack_url('elfinder/tinymce5') }}"
         bp-field-main-input
         @include('crud::fields.inc.attributes', ['default_class' =>  'form-control tinymce '.$tinymceIdentifier])
         >{{ old_empty_or_null($field['name'], '') ??  $field['value'] ?? $field['default'] ?? '' }}</textarea>
@@ -181,7 +182,7 @@ $field['options'] = array_merge($defaultOptions, $field['options'] ?? []);
     function elFinderBrowser (callback, value, meta) {
         tinymce.activeEditor.windowManager.openUrl({
             title: 'elFinder 2.0',
-            url: '{{ backpack_url("elfinder/tinymce5") }}',
+            url: tinymce.activeEditor.getElement().dataset.elfinderUrl,
             width: 900,
             height: 460,
             onMessage: function (dialogApi, details) {
