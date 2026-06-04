@@ -1,6 +1,7 @@
 <?php
 
 namespace Backpack\TinyMCEField;
+use Backpack\Basset\Facades\Basset;
 
 use Backpack\CRUD\ViewNamespaces;
 
@@ -82,6 +83,8 @@ trait AutomaticServiceProvider
         if ($this->app->runningInConsole()) {
             $this->bootForConsole();
         }
+
+        Basset::addViewPath($this->packageViewsPath());
     }
 
     /**
