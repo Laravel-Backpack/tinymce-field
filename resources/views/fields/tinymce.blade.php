@@ -39,6 +39,10 @@ $field['options'] = array_merge($defaultOptions, $field['options'] ?? []);
     {{-- include tinymce css --}}
     @basset('https://raw.githubusercontent.com/tinymce/tinymce-dist/refs/tags/6.3.2/skins/ui/oxide/skin.min.css')
     @basset('https://raw.githubusercontent.com/tinymce/tinymce-dist/refs/tags/6.3.2/skins/ui/oxide/content.min.css')
+    {{-- dark mode skins --}}
+    @basset('https://raw.githubusercontent.com/tinymce/tinymce-dist/refs/tags/6.3.2/skins/ui/oxide-dark/skin.min.css')
+    @basset('https://raw.githubusercontent.com/tinymce/tinymce-dist/refs/tags/6.3.2/skins/ui/oxide-dark/content.min.css')
+    @basset('https://raw.githubusercontent.com/tinymce/tinymce-dist/refs/tags/6.3.2/skins/content/default/content.min.css')
 @endpush
 {{-- FIELD JS - will be loaded in the after_scripts section --}}
 @push('crud_fields_scripts')
@@ -114,18 +118,17 @@ $field['options'] = array_merge($defaultOptions, $field['options'] ?? []);
 
         function setTinyMceColorMode() {
             configuration['skin'] = isTinyMceEditorInDarkMode() ? 'oxide-dark' : 'oxide';
-            
-            if (typeof configuration['content_css'] === 'undefined') {
-                configuration['content_css'] = isTinyMceEditorInDarkMode() ? 'dark' : '';
-            }
         }
 
         function setTinyMceBackgroundColor(editor) {
             let iframeDocument = editor.contentDocument || editor.contentWindow.document;
             let body = iframeDocument.getElementsByTagName('body')[0];
 
-            if (typeof configuration['content_css'] === 'undefined') {
-                body.style.cssText = isTinyMceEditorInDarkMode() ? 'background-color: #221e26; color: #c9c1d6;' : 'background-color: #fff;';
+            const bg = getComputedStyle(document.documentElement).getPropertyValue('--bp-tinymce-content-bg').trim();
+            const color = getComputedStyle(document.documentElement).getPropertyValue('--bp-tinymce-content-color').trim();
+            if (bg && color) {
+                body.style.backgroundColor = bg;
+                body.style.color = color;
             }
         }
 
@@ -134,17 +137,35 @@ $field['options'] = array_merge($defaultOptions, $field['options'] ?? []);
             return configuration['target'][0].getAttribute('id');
         }
 
+        function setTinyMceReadonly() {
+            tinymce.activeEditor.mode.set('readonly');
+            element.next('.tox-tinymce').addClass('bp-disabled');
+        }
+
+        function isTinyMceFieldDisabled() {
+            return element.attr('disabled') || element.attr('readonly');
+        }
+
         // register a listener for color change that will update the tinymce skin 
         // and re-initialize the editor instances
         if(typeof colorMode !== 'undefined') {
             colorMode.onChange(function() {
                 let editorId = getTinyMceEditorId();
                 let editorInstance = tinymce.get(editorId);
+                let wasDisabled = isTinyMceFieldDisabled();
 
                 editorInstance.remove();
 
                 setTinyMceColorMode();
-                tinymce.init(configuration);                
+                tinymce.init(configuration);
+
+                if (wasDisabled) {
+                    setTimeout(() => {
+                        if (tinymce.get(editorId)) {
+                            setTinyMceReadonly();
+                        }
+                    }, 100);
+                }
             });
         }
 
@@ -153,6 +174,14 @@ $field['options'] = array_merge($defaultOptions, $field['options'] ?? []);
 
         // initialize the TinyMCE editor
         tinymce.init(configuration);
+
+        if (isTinyMceFieldDisabled()) {
+            setTimeout(() => {
+                if (tinymce.get(getTinyMceEditorId())) {
+                    setTinyMceReadonly();
+                }
+            }, 100);
+        }
 
         var formEl = element[0].closest('form');
         if (formEl) {
@@ -165,17 +194,20 @@ $field['options'] = array_merge($defaultOptions, $field['options'] ?? []);
         }
 
         element.on('CrudField:disable', function(e) {
-            let editorId = getTinyMceEditorId();
-            let editorInstance = tinymce.get(editorId);
-            editorInstance.focus();
-            tinymce.activeEditor.mode.set('readonly');
+            let editorInstance = tinymce.get(getTinyMceEditorId());
+            if (editorInstance) {
+                editorInstance.focus();
+                setTinyMceReadonly();
+            }
         });
 
         element.on('CrudField:enable', function(e) {
-            let editorId = getTinyMceEditorId();
-            let editorInstance = tinymce.get(editorId);
-            editorInstance.focus();
-            tinymce.activeEditor.mode.set('design');
+            let editorInstance = tinymce.get(getTinyMceEditorId());
+            if (editorInstance) {
+                editorInstance.focus();
+                tinymce.activeEditor.mode.set('design');
+                element.next('.tox-tinymce').removeClass('bp-disabled');
+            }
         });
     }
 
